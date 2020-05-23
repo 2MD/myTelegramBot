@@ -26,7 +26,6 @@ public final class CommandService implements Message{
             case SUBSCRIBE: {
                 if (!isExistChart) {
                     Dao.saveNewChart(chartId, user);
-                    System.out.println("Save new  " + chartId);
                     message = welcomeMessage;
                 }
                 else message = errorMessage;

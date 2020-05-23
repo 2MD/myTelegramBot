@@ -1,7 +1,6 @@
 package kalinina;
 
 import kalinina.service.CommandService;
-import kalinina.service.Dao;
 import kalinina.util.Command;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -14,11 +13,9 @@ public class MyBot extends TelegramLongPollingBot {
         try {
             if (!update.hasCallbackQuery()) {
                 var message = update.getMessage();
-                long chatId = message.getChatId();
-                execute(CommandService.commandExecute(Command.findCommand(message.getText()), chatId));
+                execute(CommandService.commandExecute(Command.findCommand(message.getText()), message.getChatId()));
             } else {
                 var message = update.getCallbackQuery();
-
                 execute(
                         CommandService.commandCallBackExecute(
                                 Command.findCommand(message.getData()),
